@@ -38,7 +38,7 @@ function renderAllStudents(studentArray){
 
 function getStudentData(){
     $.ajax({
-        url: './assets/read.json',
+        url: 'server/getStudents.php',
         dataType: 'json',
         method: 'get',
 
