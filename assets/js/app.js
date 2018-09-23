@@ -1,36 +1,12 @@
-var data = {
-    "students": [
-        {
-            id: 1,
-            name: 'Michael Salvati',
-            grade: 89,
-            course_name: 'JavaScript'
-        },
-        {
-            id: 2,
-            name: 'Evan Carter',
-            grade: 99,
-            course_name: 'Coloring'
-        },
-        {
-            id: 3,
-            name: 'Yajaira Mora',
-            grade: 90,
-            course_name: 'Politics'
-        },
-    ]
-}
-
 $( document ).ready( AppReady );
 
 function AppReady() {
     console.log( "App Ready!" );
-    getTaskData();
-
+    getStudentData();
 }
 
-function createTaskItem(studentObject){
-    console.log('Create Task Item Triggered');
+function createStudentItem(studentObject){
+    console.log('Create Student Item Triggered');
     const studentContainer = $("<div>",{
         'class': 'studentEntry'
     });
@@ -50,18 +26,33 @@ function createTaskItem(studentObject){
     return studentContainer;
 }
 
-function renderAllTasks(studentArray){
+function renderAllStudents(studentArray){
     const studentElements = [];
-    console.log('Render All Tasks Function Triggered');
+    console.log('Render All Students Function Triggered');
     for(let i = 0; i < studentArray.length; i++){
-        let element = createTaskItem(studentArray[i]);
+        let element = createStudentItem(studentArray[i]);
         studentElements.push(element);
     }
     $('#displayStudents').append(studentElements);
 }
 
-function getTaskData(){
-    renderAllTasks(data.students);
+function getStudentData(){
+    $.ajax({
+        url: './assets/read.json',
+        dataType: 'json',
+        method: 'get',
+
+        success: function(response){
+            if(response.students.length > 0){
+            renderAllStudents(response.students);
+            }
+        },
+
+        error: function(){
+            console.log('Server Connection Error')
+        }
+    })
+    
 }
 
 
