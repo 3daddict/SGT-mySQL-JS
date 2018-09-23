@@ -34,18 +34,20 @@ function createTaskItem(studentObject){
     const studentContainer = $("<div>",{
         'class': 'studentEntry'
     });
-    const name = $('<div', {
+    const name = $('<div>', {
         'class': 'name',
         text: studentObject.name
     });
-    const grade = $('<div', {
+    const grade = $('<div>', {
         'class': 'grade',
         text: studentObject.grade
     });
-    const course = $('<div', {
+    const course = $('<div>', {
         'class': 'course',
         text: studentObject.course_name
     });
+    studentContainer.append(name, grade, course);
+    return studentContainer;
 }
 
 function renderAllTasks(studentArray){
